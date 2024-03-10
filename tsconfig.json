@@ -6,6 +6,13 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
+    // schdn
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    // schdn
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

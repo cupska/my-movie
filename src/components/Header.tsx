@@ -9,7 +9,7 @@ function Header({
   menuHamProps: Partial<HTMLAttributes<HTMLButtonElement>>;
 }) {
   return (
-    <header className=" relative flex justify-between p-4">
+    <header className=" relative flex bg-white justify-between p-4">
       <button className=" select-none" type="button" {...menuHamProps}>
         <GiHamburgerMenu className=" float-end text-2xl" />
       </button>

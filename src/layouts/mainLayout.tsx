@@ -1,20 +1,23 @@
 import { ReactNode, useState } from "react";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import "./mainLayout.css";
+import { useWindowDirection } from "@/hooks/useWindowDirection";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  console.log({
-    isMenuOpen: isMenuOpen,
-  });
+  const Wdirection = useWindowDirection();
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>();
+
+  // console.log({
+  //   isMenuOpen: isMenuOpen,
+  //   screen: screen,
+  // });
   return (
     <>
       {/* Backdrop */}
       <div
         className={
-          " fixed h-dvh w-full left-0 top-0 flex duration-1000 items-center " +
-          (isMenuOpen ? "blur-0 duration-1000" : "   blur-lg")
+          " fixed h-dvh w-full left-0 top-0 flex duration-700 items-center " +
+          (isMenuOpen ? "blur-0  " : "   blur-lg")
         }
       >
         <Navbar />
@@ -22,17 +25,25 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       {/* Backdrop END */}
       <div
         className={
-          " min-h-dvh menuAnimasi bg-white" + (isMenuOpen ? " buka " : " tutup")
+          " min-h-dvh relative bg-white " +
+          (isMenuOpen ? " buka duration-300 scale-75 translate-x-1/2" : " duration-700")
         }
         onClick={() => isMenuOpen && setIsMenuOpen(false)}
       >
-        <Header
-          menuHamProps={{
-            onClick() {
-              setIsMenuOpen(!isMenuOpen);
-            },
-          }}
-        />
+        <div
+          className={
+            " sticky top-0 duration-150" +
+            (Wdirection == "down" ? " -translate-y-[100%]" : "")
+          }
+        >
+          <Header
+            menuHamProps={{
+              onClick() {
+                setIsMenuOpen(!isMenuOpen);
+              },
+            }}
+          />
+        </div>
         {children}
       </div>
     </>
